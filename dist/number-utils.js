@@ -73,10 +73,6 @@ define(function() {
 				dataTotal += data[i].value;
 			}
 			return dataTotal;
-		},
-		getAngle: function(value, dataTotal, totalSize) {
-			totalSize = (typeof totalSize === 'undefined') ? Circle.whole : totalSize;
-			return (totalSize / dataTotal) * value;
 		}
 	}
 });
