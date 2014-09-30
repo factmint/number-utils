@@ -1,35 +1,40 @@
 define(function() {
 	return {
-	    roundToOrder: function(number, orderlessTarget, degrees) {
-			if (number == 0) return 0;
+    roundToOrder: function(number, orderlessTarget, degrees) {
 
-			if (! degrees) degrees = 2;
+      if (number == 0) return 0;
 
-			function recurse(number, orderlessTarget) {
-				var magnitude = Math.abs(number);
-				if (magnitude >= Math.pow(10, degrees)) {
-					number /= 10;
-					number = recurse(number, orderlessTarget);
-					number *= 10;
-				} else if (magnitude < Math.pow(10, degrees - 1)) {
-					number *= 10;
-					number = recurse(number, orderlessTarget);
-					number /= 10;
-				} else {
-					var roundedValue = Math.round(number / orderlessTarget) * orderlessTarget;
-					if (roundedValue === 0) {
-						degrees++;
-						roundedValue = recurse(number, orderlessTarget);
-					}
-					number = roundedValue;
-				}
+      if (! degrees) degrees = 2;
 
-				return number;
-			}
+      if( orderlessTarget === 1 ){
+        return parseFloat( number.toPrecision( degrees ) );
+      }
+      
+      return recurse(number, orderlessTarget);
 
-			
-			return recurse(number, orderlessTarget);
-		},
+      function recurse(number, orderlessTarget) {
+        var magnitude = Math.abs(number);
+        if (magnitude >= Math.pow(10, degrees)) {
+          number /= 10;
+          number = recurse(number, orderlessTarget);
+          number *= 10;
+        } else if (magnitude < Math.pow(10, degrees - 1)) {
+          number *= 10;
+          number = recurse(number, orderlessTarget);
+          number /= 10;
+        } else {
+          var roundedValue = Math.round(number / orderlessTarget) * orderlessTarget;
+          if (roundedValue === 0) {
+            degrees++;
+            roundedValue = recurse(number, orderlessTarget);
+          }
+          number = roundedValue;
+        }
+
+        return parseFloat( number.toPrecision( degrees + 1 ) );
+      }
+
+    },
 		renderValue: function(value) {
 			var sign = 1;
 			if (value < 0) {
