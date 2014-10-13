@@ -3,6 +3,8 @@ define(function() {
 		roundToOrder: function(number, orderlessTarget, degrees) {
 			number = parseFloat(number);
 
+			if (! number) return;
+
 			if (number == 0) return 0;
 
 			if (! degrees) degrees = 2;
