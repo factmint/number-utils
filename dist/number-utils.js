@@ -38,7 +38,7 @@ define(function() {
 		},
 		renderValue: function(value) {
 
-			if (number === '') return '';
+			if (! value) return '';
 
 			var sign = 1;
 			if (value < 0) {
