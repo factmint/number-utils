@@ -1,11 +1,17 @@
 define(function() {
 	return {
-	    roundToOrder: function(number, orderlessTarget, degrees) {
-	    	number = parseFloat(number);
-	
+		roundToOrder: function(number, orderlessTarget, degrees) {
+			number = parseFloat(number);
+
 			if (number == 0) return 0;
 
 			if (! degrees) degrees = 2;
+
+			if( orderlessTarget === 1 ){
+				return parseFloat( number.toPrecision( degrees ) );
+			}
+			
+			return recurse(number, orderlessTarget);
 
 			function recurse(number, orderlessTarget) {
 				var magnitude = Math.abs(number);
@@ -26,11 +32,9 @@ define(function() {
 					number = roundedValue;
 				}
 
-				return number;
+				return parseFloat( number.toPrecision( degrees + 1 ) );
 			}
 
-			
-			return recurse(number, orderlessTarget);
 		},
 		renderValue: function(value) {
 			var sign = 1;
