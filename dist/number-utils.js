@@ -7,7 +7,7 @@ define(function() {
 
 			if (! degrees) degrees = 2;
 
-			if( orderlessTarget === 1 ){
+			if (orderlessTarget === 1) {
 				return parseFloat( number.toPrecision( degrees ) );
 			}
 			
@@ -38,6 +38,7 @@ define(function() {
 		},
 		renderValue: function(value) {
 
+			if (value === 0) return 0;
 			if (! value) return '';
 
 			var sign = 1;
@@ -64,9 +65,6 @@ define(function() {
 			}
 
 			var normalizedNumber = new String(sign * recurseToStandardForm(value));
-			if (normalizedNumber.match(/\.[0-9]/) == null) {
-				normalizedNumber += ".0";
-			}
 
 			if (power == 3) {
 				return normalizedNumber + "k";
