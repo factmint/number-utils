@@ -88,6 +88,16 @@ define(function() {
 		getAngle: function(value, dataTotal, totalSize) {
 			totalSize = (typeof totalSize === 'undefined') ? Circle.whole : totalSize;
 			return (totalSize / dataTotal) * value;
+		},
+		getFactor: function(number) {
+			for (var factor = number - 1; factor > 1; factor--) {
+				var fraction = number / factor;
+				if (parseInt(fraction) == fraction) {
+					return factor;
+				}
+			}
+			
+			return number;
 		}
 	}
 });
